@@ -1,104 +1,103 @@
 # Gestor de Tareas y Proyectos en Java
 
-Proyecto académico de **Ingeniería de Software II** — Universidad Libre.
+Proyecto  de Ingeniería de Software II — Universidad Libre.
 
-> **Documento vivo:** Este `README.md` se actualiza progresivamente en cada etapa del proyecto. Cada integrante documenta exclusivamente las decisiones, implementaciones y pruebas reales de su módulo.
 
----
+Sobre el proyecto
 
-## 1. Equipo y responsabilidades
 
-| Integrante | Módulo principal | Sección principal en este README |
-| :--- | :--- | :--- |
-| **Juan David Diaz** | Arquitectura, Modelo base, Patrón **Composite**, integración del núcleo | Secciones 2, 3 y 4.1 |
-| **Helen Sofia Malagon** | Patrón **State**, reglas de transición, filtros, ordenamiento y alertas | Sección 4.2 |
-| **Daniel Santiago Cruz** | Patrón **Command**, historial Undo/Redo y plantillas recurrentes | Sección 4.3 |
 
----
+La aplicacion va a tener dos formas de usarse: una por consola y una interfaz grafica sencilla hecha en Java Swing. Lo importante es que las dos se conectan exactamente a la misma logica de negocio, asi que no duplicamos reglas. Todo se maneja en memoria mientras el programa esta abierto.
 
-## 2. Arquitectura y estructura del proyecto *(Responsable: Juan David Diaz)*
+Lo que va a hacer el programa:
 
-El sistema separa la presentación (Consola y Java Swing) del núcleo de negocio (`service`, `model` y `patterns`), garantizando que ambas interfaces consuman exactamente los mismos servicios.
+Crear tareas simples y tareas compuestas que agrupan subtareas en varios niveles.
 
-```text
-gestor-tareas/
-├── pom.xml
-├── README.md
-├── src/
-│   ├── main/java/com/unilibre/gestortareas/
-│   │   ├── model/
-│   │   ├── patterns/
-│   │   │   ├── composite/
-│   │   │   ├── state/
-│   │   │   └── command/
-│   │   ├── service/
-│   │   ├── console/
-│   │   ├── gui/
-│   │   └── application/
-│   └── test/java/com/unilibre/gestortareas/
-├── documentacion/
-└── respaldo_vba/
-```
+Controlar los estados de cada tarea (Pendiente, En curso, En revision y Terminada) respetando las transiciones permitidas.
 
----
+Deshacer y rehacer acciones del usuario.
 
-## 3. Compilación, pruebas y ejecución *(Responsable inicial: Juan David Diaz; actualización conjunta)*
+Mostrar alertas de tareas vencidas o proximas a vencer junto con sus responsables.
 
-### Requisitos técnicos
-- Java JDK 17 o superior
-- Apache Maven 3.8 o superior
-- Git
+Usar plantillas listas para crear rapido tareas o proyectos que se repiten seguido.
 
-### Comandos
-```bash
-# Compilar el proyecto
-mvn clean compile
+Ordenar y filtrar tareas por prioridad, fecha limite, estado o responsable.
 
-# Ejecutar pruebas unitarias (JUnit 5)
-mvn test
+Como organizamos el codigo (Encargado: Juan)
 
-# Ejecutar la aplicación
-mvn exec:java -Dexec.mainClass="com.unilibre.gestortareas.application.Main"
-```
+Dividimos el proyecto en tres capas para mantener todo ordenado y evitar mezclar la interfaz con la logica:
 
----
+Presentacion (paquetes console y gui): solo reciben datos del usuario y muestran resultados.
 
-## 4. Documentación por módulo y patrón
+Servicios (paquete service): coordinan las acciones, el historial, las plantillas, los filtros y las alertas.
 
-### 4.1. Modelo base y Patrón Composite *(Responsable: Juan David Diaz)*
-- **Estado:** Asignado (pendiente de implementación en Etapa 4).
-- **Decisiones registradas:** Progreso de tarea compuesta vacía depende de su propio estado; progreso multinivel recursivo; validación de duplicados por ID y prevención de ciclos jerárquicos.
-- **Pruebas verificadas:** Pendiente.
+Modelo y Patrones (paquetes model y patterns): aqui viven las clases principales y las reglas del negocio.
 
-### 4.2. Patrón State, filtros y alertas *(Responsable: Helen Sofia Malagon)*
-- **Estado:** Asignado (pendiente de implementación en Etapa 4).
-- **Decisiones registradas:** Estados `Pendiente`, `En curso`, `En revisión` y `Terminada` con transiciones controladas y método `restaurarEstado(...)` en `TareaBase` para desacoplar Undo de las reglas de negocio.
-- **Pruebas verificadas:** Pendiente.
+Dentro de src/main/java/com/unilibre/gestortareas tenemos:
 
-### 4.3. Patrón Command, historial y plantillas *(Responsable: Daniel Santiago Cruz)*
-- **Estado:** Asignado (pendiente de implementación en Etapa 4).
-- **Decisiones registradas:** `GestorHistorial` con pilas `pilaDeshacer`/`pilaRehacer`; protección ante comandos fallidos; preservación de índice original al deshacer eliminación; plantillas predefinidas en `PlantillaTareaService`.
-- **Pruebas verificadas:** Pendiente.
+model: la enumeracion Prioridad.
 
----
+patterns/composite: ComponenteTarea, TareaBase, TareaSimple y TareaCompuesta.
 
-## 5. Registro de estado por etapa *(Actualización conjunta)*
+patterns/state: EstadoTarea y los cuatro estados concretos.
 
-| Etapa | Descripción | Estado | Responsable(s) |
-| :--- | :--- | :--- | :--- |
-| Etapa 1 | Análisis y planificación | Verificada | Equipo completo |
-| Etapa 2 | Arquitectura y diseño | Verificada | Equipo completo |
-| Etapa 3 | Configuración Maven, JUnit 5 y Git | Asignada (pendiente de confirmación) | Juan David (inicialización), Helen y Daniel (verificación local) |
-| Etapa 4 | Implementación del núcleo (Composite, State, Command, Servicios) | Pendiente | Juan David, Helen, Daniel |
-| Etapa 5 | Interfaz por consola | Pendiente | Equipo completo |
-| Etapa 6 | Interfaz gráfica Swing | Pendiente | Equipo completo |
-| Etapa 7 | Pruebas unitarias JUnit 5 | Pendiente | Equipo completo |
-| Etapa 8 | Diagramas UML editables en Word (VBA) | Pendiente | Equipo completo |
-| Etapa 9 | Documento de diseño | Pendiente | Equipo completo |
-| Etapa 10 | Preparación de sustentación | Pendiente | Equipo completo |
+patterns/command: Comando, GestorHistorial y los comandos concretos.
 
----
+service: GestorTareasService y PlantillaTareaService.
 
-## 6. Conclusiones e integridad académica *(Actualización conjunta al cierre)*
-- *Pendiente de completar al finalizar la implementación y pruebas.*
+console: MenuConsola.
+
+gui: VentanaPrincipal.
+
+application: Main.
+
+Y en src/test/java/com/unilibre/gestortareas/patterns iran las pruebas unitarias con JUnit 5 para comprobar que cada patron funcione bien.
+
+Que se necesita para correrlo (Encargado: Juan)
+
+Solo hace falta tener instalado Java JDK 17 o superior, Apache Maven y Git.
+
+Desde la carpeta raiz del proyecto (donde esta el pom.xml), se usan estos comandos en la terminal:
+
+Para compilar: mvn clean compile
+
+Para correr las pruebas: mvn test
+
+Para abrir el programa: mvn exec:java -Dexec.mainClass="com.unilibre.gestortareas.application.Main"
+
+Tambien se puede abrir la carpeta directo en IntelliJ, NetBeans o VS Code y ejecutar la clase Main.
+
+Lo que lleva cada uno
+
+Cada uno va actualizando su parte aqui conforme termina y prueba sus clases.
+
+Parte de Juan (modelo base y patron Composite): La idea de esta parte es poder trabajar igual con una tarea suelta o con un proyecto lleno de subtareas sin llenar todo el programa de validaciones manuales. Ya dejamos listos los archivos base del contrato: Prioridad, la interfaz ComponenteTarea y la clase abstracta TareaBase (donde se manejan los datos comunes, los responsables y la conexion con los estados). Lo siguiente es programar TareaSimple, TareaCompuesta (controlando duplicados, ciclos y el calculo de progreso) y las pruebas en CompositeTest.
+
+Parte de Helen (patron State, filtros y alertas): Como las tareas pasan por cuatro estados y no se puede saltar de cualquiera a cualquiera, usamos State para que cada estado decida que permite y que rechaza, evitando bloques enormes de if y else. Ya esta acordada la interfaz EstadoTarea. En la siguiente ronda se van a programar EstadoPendiente, EstadoEnCurso, EstadoEnRevision y EstadoTerminada junto con sus pruebas en StateTest, y despues se agregan los filtros, el ordenamiento y las alertas por fecha limite en el servicio.
+
+Parte de Daniel (patron Command y plantillas): Para poder deshacer y rehacer sin tener que guardar copias gigantes de todo el sistema cada vez que pasa algo, cada accion se va a manejar como un objeto comando. Ya quedo definida la interfaz Comando con ejecutar, deshacer y getDescripcion. Lo que sigue es armar GestorHistorial, los cuatro comandos concretos (crear, eliminar, agregar subtarea y cambiar estado), el servicio de plantillas y las pruebas en CommandTest.
+
+Como vamos hasta hoy
+
+Primero revisamos el enunciado del parcial, definimos que entraba y que dejabamos por fuera, y escogimos los tres patrones (Composite, State y Command). Esto ya quedo cerrado.
+
+Despues definimos la arquitectura por capas, los paquetes, los contratos entre clases y los casos de prueba que vamos a cubrir. Tambien quedo listo.
+
+Configuramos Maven con JUnit 5, el .gitignore y las ramas main y develop en el repositorio. Ya comprobamos que Maven compila bien en local.
+
+Dejamos listos los archivos de contratos base (Prioridad, ComponenteTarea, EstadoTarea, TareaBase y Comando) para que los tres podamos programar en paralelo sin pisarnos. Falta confirmar que queden fusionados y compilando en develop.
+
+Queda pendiente para las proximas rondas: implementar los tres patrones con sus pruebas unitarias, integrar los servicios, armar la consola, hacer la ventana en Swing, generar los diagramas UML en Word y cerrar el documento final junto con la sustentacion.
+
+Como estamos usando Git
+
+Mantenemos la rama main para la version estable, develop para ir juntando lo que ya funciona, y ramas feature/... para que cada uno trabaje tranquilo en su parte. Cada persona hace sus propios commits con su cuenta real y mensajes cortos que expliquen el cambio (usando prefijos como feat, fix, test, docs o build).
+
+Uso de herramientas de IA
+
+Cumpliendo con las reglas del curso, dejamos claro que usamos Gemini como apoyo durante el proyecto para organizar el trabajo por etapas, revisar decisiones de diseno y guiarnos con la estructura de clases, pruebas y documentacion. Todo lo que se sube al repositorio lo revisamos, compilamos y entendemos entre los tres.
+
+Conclusiones
+
+Esta parte la escribiremos entre los tres cuando terminemos el codigo y las pruebas.
 - **Declaración de uso de IA:** Se registrará explícitamente la herramienta utilizada y su rol de apoyo académico/revisión técnica, verificando que los tres integrantes comprendan y defiendan la totalidad del código entregado.
