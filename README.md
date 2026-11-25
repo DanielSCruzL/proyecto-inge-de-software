@@ -101,4 +101,4 @@ mvn exec:java -Dexec.mainClass="com.unilibre.gestortareas.application.Main"
 
 ## 6. Conclusiones e integridad académica *(Actualización conjunta al cierre)*
 - *Pendiente de completar al finalizar la implementación y pruebas.*
-- **Declaración de uso de IA:** Se registrará explícitamente la herramienta utilizada y su rol de apoyo académico/revisión técnica, verificando que los tres integrantes comprendan y defiendan la totalidad del código entregado.
+.
