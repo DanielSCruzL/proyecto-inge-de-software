@@ -2,7 +2,7 @@
 
 Proyecto académico de **Ingeniería de Software II** — Universidad Libre.
 
-> **Documento vivo:** Este `README.md` se actualiza progresivamente en cada etapa del proyecto. Cada integrante documenta exclusivamente las decisiones, implementaciones y pruebas reales de su módulo.
+> **Documento vivo:** Este `README.md` se actualiza progresivamente en cada etapa del proyecto. Cada integrante documenta exclusivamente las decisiones, implementaciones y pruebss reales de su módulo.
 
 ---
 
