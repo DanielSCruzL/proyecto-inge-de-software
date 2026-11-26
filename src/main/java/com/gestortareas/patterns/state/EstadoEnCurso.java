@@ -1,11 +1,8 @@
-package com.gestortareas.patterns.state;
+package gestortareas.;
 
-import com.gestortareas.model.TareaBase;
+import gestortareas.model.TareaBase;
 
-/**
- * Estado activo de trabajo.
- * Permite avanzar a En revisión o volver a Pendiente mediante reabrir.
- */
+
 public class EstadoEnCurso implements EstadoTarea {
 
     @Override
