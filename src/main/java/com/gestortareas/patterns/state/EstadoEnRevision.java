@@ -1,6 +1,7 @@
-package gestortareas.patterns.state;
+package com.gestortareas.patterns.state;
 
-import gestortareas.model.TareaBase;
+import com.gestortareas.model.TareaBase;
+
 
 /**
  * Estado de verificación previa al cierre.
