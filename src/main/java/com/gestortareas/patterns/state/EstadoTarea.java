@@ -1,6 +1,8 @@
-package gestortareas;
+package com.gestortareas.patterns.state;
 
-import gestortareas.model.TareaBase;
+
+import com.gestortareas.model.TareaBase;
+
 
 /**
  * Interfaz del patrón State.
