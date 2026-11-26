@@ -1,6 +1,6 @@
-package gestortareas.;
+package com.gestortareas.patterns.state;
 
-import gestortareas.model.TareaBase;
+import com.gestortareas.model.TareaBase;
 
 
 public class EstadoEnCurso implements EstadoTarea {
