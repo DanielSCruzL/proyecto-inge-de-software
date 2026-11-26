@@ -4,7 +4,6 @@ import com.gestortareas.model.TareaBase;
 import com.gestortareas.patterns.composite.Proyecto;
 import com.gestortareas.service.GestorTareasService;
 
-// Agrega una tarea o proyecto en la raíz o dentro de un proyecto padre
 public class ComandoAgregarElemento implements Comando {
 
     private final GestorTareasService servicio;

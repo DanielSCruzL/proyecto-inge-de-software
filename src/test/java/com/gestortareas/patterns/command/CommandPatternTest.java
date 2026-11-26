@@ -16,9 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/**
- * Pruebas unitarias del patrón Command (ejecución, deshacer, rehacer y manejo de errores).
- */
 class CommandPatternTest {
 
     @Test
@@ -31,16 +28,13 @@ class CommandPatternTest {
         assertEquals("Editada", servicio.buscarPorId(id).getTitulo());
         assertEquals(Prioridad.ALTA, servicio.buscarPorId(id).getPrioridad());
 
-        // Deshacer edición
         assertTrue(servicio.deshacer());
         assertEquals("Original", servicio.buscarPorId(id).getTitulo());
         assertEquals(Prioridad.BAJA, servicio.buscarPorId(id).getPrioridad());
 
-        // Deshacer creación
         assertTrue(servicio.deshacer());
         assertNull(servicio.buscarPorId(id));
 
-        // Rehacer creación y edición
         assertTrue(servicio.rehacer());
         assertNotNull(servicio.buscarPorId(id));
         assertTrue(servicio.rehacer());
@@ -59,15 +53,12 @@ class CommandPatternTest {
         servicio.reabrirTarea(tarea.getId());
         assertEquals("Pendiente", tarea.getNombreEstado());
 
-        // Deshacer reapertura vuelve a En curso
         assertTrue(servicio.deshacer());
         assertEquals("En curso", tarea.getNombreEstado());
 
-        // Deshacer inicio vuelve a Pendiente
         assertTrue(servicio.deshacer());
         assertEquals("Pendiente", tarea.getNombreEstado());
 
-        // Eliminar y deshacer eliminación
         servicio.eliminarElemento(tarea.getId());
         assertNull(servicio.buscarPorId(tarea.getId()));
         assertTrue(servicio.deshacer());
@@ -86,7 +77,7 @@ class CommandPatternTest {
         servicio.deshacer();
         assertTrue(servicio.puedeRehacer());
 
-        // Al ejecutar un nuevo comando, la pila de rehacer debe vaciarse
+        // Al hacer una accion nueva se limpia la pila de rehacer
         servicio.crearTareaSimple("Nueva rama", "", Prioridad.ALTA, null, null);
         assertFalse(servicio.puedeRehacer());
         assertFalse(servicio.rehacer());
@@ -99,11 +90,10 @@ class CommandPatternTest {
         TareaSimple tarea = servicio.crearTareaSimple("Prueba error", "Desc inicial", Prioridad.MEDIA, null, null);
         int historialAntes = servicio.obtenerHistorialAcciones().size();
 
-        // Transición inválida no entra al historial
         assertThrows(IllegalStateException.class, () -> servicio.completarTarea(tarea.getId()));
         assertEquals(historialAntes, servicio.obtenerHistorialAcciones().size());
 
-        // Edición inválida (prioridad nula) no debe modificar parcialmente el título ni entrar al historial
+        // Si falla la validacion, no debe quedar editada a medias
         assertThrows(IllegalArgumentException.class,
                 () -> servicio.editarElemento(tarea.getId(), "Título nuevo", "Desc nueva", null, null));
         assertEquals("Prueba error", tarea.getTitulo());

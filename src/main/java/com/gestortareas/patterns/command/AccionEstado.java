@@ -1,6 +1,5 @@
 package com.gestortareas.patterns.command;
 
-// Acciones posibles para cambiar el estado de una tarea
 public enum AccionEstado {
     INICIAR("Iniciar"),
     ENVIAR_A_REVISION("Enviar a revisión"),

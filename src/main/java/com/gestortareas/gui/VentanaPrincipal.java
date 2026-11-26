@@ -31,10 +31,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
-/**
- * Interfaz gráfica sencilla en Java Swing.
- * Comparte el mismo núcleo de negocio (GestorTareasService) que la aplicación de consola.
- */
+// Ventana principal en Swing conectada al servicio compartido
 public class VentanaPrincipal extends JFrame {
 
     private final GestorTareasService servicio;
@@ -68,7 +65,7 @@ public class VentanaPrincipal extends JFrame {
     }
 
     private void construirInterfaz() {
-        // --- Panel superior: acciones CRUD + filtros ---
+        // Barra superior de botones y filtros
         JPanel panelSuperior = new JPanel(new GridLayout(2, 1, 4, 4));
         panelSuperior.setBorder(BorderFactory.createEmptyBorder(6, 8, 2, 8));
 
@@ -148,7 +145,7 @@ public class VentanaPrincipal extends JFrame {
         panelSuperior.add(barraFiltros);
         add(panelSuperior, BorderLayout.NORTH);
 
-        // --- Panel central: Árbol Composite (izquierda) + Tabla detallada (derecha) ---
+        // Arbol a la izquierda y tabla a la derecha
         DefaultMutableTreeNode raizVisual = new DefaultMutableTreeNode("Espacio de Trabajo");
         modeloArbol = new DefaultTreeModel(raizVisual);
         arbolProyectos = new JTree(modeloArbol);
@@ -174,7 +171,7 @@ public class VentanaPrincipal extends JFrame {
         splitPane.setDividerLocation(320);
         add(splitPane, BorderLayout.CENTER);
 
-        // --- Panel inferior: transiciones de estado + resumen de alertas ---
+        // Botones de estado y resumen de alertas
         JPanel panelInferior = new JPanel(new BorderLayout(8, 4));
         panelInferior.setBorder(BorderFactory.createEmptyBorder(4, 8, 8, 8));
 

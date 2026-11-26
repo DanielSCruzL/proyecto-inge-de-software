@@ -4,7 +4,6 @@ import com.gestortareas.model.TareaBase;
 import com.gestortareas.patterns.composite.Proyecto;
 import com.gestortareas.service.GestorTareasService;
 
-// Elimina una tarea o proyecto guardando su posición original para restaurarlo al deshacer
 public class ComandoEliminarElemento implements Comando {
 
     private final GestorTareasService servicio;
