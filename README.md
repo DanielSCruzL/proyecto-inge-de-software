@@ -4,9 +4,9 @@ Aplicación universitaria en Java 17 para gestionar proyectos y tareas de forma 
 
 ## Integrantes
 
-- **Juan David Díaz**
-- **Helen Sofía Malagón**
-- **Daniel Santiago Cruz**
+- **Juan David Díaz Ramírez**
+- **Helen Sofía Malagón Cruz**
+- **Daniel Santiago Cruz López**
 
 ---
 
